@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class RentalMobil {
 
     private static final double DISKON = 0.1; // 10% discount for rentals over 7 days
@@ -15,9 +17,13 @@ public class RentalMobil {
     }
 
     public void tampilkanMobil() {
-        System.out.println("Available Cars:");
+        System.out.println("Cars:");
         for (Mobil mobil : daftarMobil) {
-            System.out.println(mobil.id + ". " + mobil.getNamaMobil() + " - Rp " + mobil.getTarfPerHari() + " per day");
+            if (mobil.available) {
+                System.out.println(mobil.id + ". " + mobil.getNamaMobil() + " - Rp " + mobil.getTarfPerHari() + " per day");
+            } else {
+                System.out.println(mobil.id + ". " + mobil.getNamaMobil() + " - Rp " + mobil.getTarfPerHari() + " per day (Rented)");
+            }
         }
     }
 
@@ -33,10 +39,22 @@ public class RentalMobil {
         return totalHarga;
     }
 
-    public void tampilkanStruk(int mobilId, int durasi, int payMethod) {
-        double totalBiaya = hitungBiaya(mobilId, durasi);
+    public void tampilkanStruk(ArrayList<Integer> mobilId, ArrayList<Integer> durasi, int payMethod) {
         String paymentMethod;
-        Mobil mobil = daftarMobil[mobilId - 1];
+        double totalBiaya = 0;
+
+        System.out.println("\n=== PAYMENT RECEIPT ===");
+
+        for (int i = 0; i < mobilId.size(); i++)
+        {
+            double biayaMobil = hitungBiaya(mobilId.get(i), durasi.get(i));
+            Mobil mobil = daftarMobil[mobilId.get(i) - 1];
+
+            System.out.println("Selected Car: " + mobil.getNamaMobil());
+            System.out.println("Rental Duration: " + durasi.get(i) + " days");
+            System.out.println("Car Cost: Rp " + biayaMobil + "\n");
+            totalBiaya += biayaMobil;
+        }
 
         switch (payMethod) {
             case 1:
@@ -49,14 +67,11 @@ public class RentalMobil {
                 paymentMethod = "Unknown";
         }
 
-        System.out.println("\n=== PAYMENT RECEIPT ===");
-        System.out.println("Selected Car: " + mobil.getNamaMobil());
-        System.out.println("Rental Duration: " + durasi + " days");
-        System.out.println("Total Cost: Rp " + totalBiaya);
+        System.out.println("Total Payment: " + totalBiaya);
         System.out.println("Payment: " + paymentMethod);
     }
 
-    public int getDafterMobilLength() {
+    public int getDaftarMobilLength() {
         return daftarMobil.length;
     }
 
@@ -70,5 +85,28 @@ public class RentalMobil {
         double diskon = DISKON_TAMBAHAN + hitungDiskonTambahan(sisaDurasi - 1);
 
         return diskon;
+    }
+
+    public void makeUnavailable(int mobilId) {
+        for (Mobil mobil : daftarMobil) {
+            if (mobilId == mobil.id) {
+                mobil.available = false;
+                return;
+            }
+        }
+        System.out.println("Error: Car with ID " + mobilId + " not found!");
+    }
+
+    public boolean getMobilAvailability(int id) {
+        return daftarMobil[id - 1].available;
+    }
+
+    public boolean getDaftarAvailability() {
+        for (Mobil mobil : daftarMobil) {
+            if (mobil.available) {
+                return true;
+            }
+        }
+        return false;
     }
 }
