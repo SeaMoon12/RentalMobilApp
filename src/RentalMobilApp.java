@@ -25,8 +25,12 @@ public class RentalMobilApp {
         System.out.print("How many days would you like to rent this car? ");
         int durasi = scanner.nextInt();
 
+        // Select payment method
+        System.out.print("How would you like to pay (1 for Cash or 2 for Credit Card)? ");
+        int paymentMethod = scanner.nextInt();
+
         // Display receipt
-        rental.tampilkanStruk(mobilId, durasi);
+        rental.tampilkanStruk(mobilId, durasi, paymentMethod);
 
         scanner.close();
     }

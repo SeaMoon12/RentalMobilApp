@@ -33,14 +33,27 @@ public class RentalMobil {
         return totalHarga;
     }
 
-    public void tampilkanStruk(int mobilId, int durasi) {
+    public void tampilkanStruk(int mobilId, int durasi, int payMethod) {
         double totalBiaya = hitungBiaya(mobilId, durasi);
+        String paymentMethod;
         Mobil mobil = daftarMobil[mobilId - 1];
+
+        switch (payMethod) {
+            case 1:
+                paymentMethod = "Cash";
+                break;
+            case 2:
+                paymentMethod = "Credit Card";
+                break;
+            default:
+                paymentMethod = "Unknown";
+        }
 
         System.out.println("\n=== PAYMENT RECEIPT ===");
         System.out.println("Selected Car: " + mobil.getNamaMobil());
         System.out.println("Rental Duration: " + durasi + " days");
         System.out.println("Total Cost: Rp " + totalBiaya);
+        System.out.println("Payment: " + paymentMethod);
     }
 
     public int getDafterMobilLength() {
