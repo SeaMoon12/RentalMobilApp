@@ -1,6 +1,7 @@
 public class RentalMobil {
 
     private static final double DISKON = 0.1; // 10% discount for rentals over 7 days
+    private static final double DISKON_TAMBAHAN = 0.01; // additional 1% discunt for every one day more than 7.
     private Mobil[] daftarMobil;
 
     public RentalMobil() {
@@ -25,7 +26,8 @@ public class RentalMobil {
         double totalHarga = mobilDipilih.getTarfPerHari() * durasi;
 
         if (durasi > 7) {
-            totalHarga = totalHarga - (totalHarga * DISKON);
+            double diskonTotal = DISKON + hitungDiskonTambahan(durasi - 7);
+            totalHarga = totalHarga - (totalHarga * diskonTotal);
         }
 
         return totalHarga;
@@ -43,5 +45,17 @@ public class RentalMobil {
 
     public int getDafterMobilLength() {
         return daftarMobil.length;
+    }
+
+    public double hitungDiskonTambahan(int sisaDurasi) {
+        // additonal 1% discount for every one additional day
+
+        if (sisaDurasi == 0) {
+            return 0;
+        }
+
+        double diskon = DISKON_TAMBAHAN + hitungDiskonTambahan(sisaDurasi - 1);
+
+        return diskon;
     }
 }
