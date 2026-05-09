@@ -4,6 +4,7 @@ public class RentalMobil {
 
     private static final double DISKON = 0.1; // 10% discount for rentals over 7 days
     private static final double DISKON_TAMBAHAN = 0.01; // additional 1% discunt for every one day more than 7.
+    private static final int BIAYA_TERLAMBAT_PER_HARI = 100000;
     private Mobil[] daftarMobil;
 
     public RentalMobil() {
@@ -35,11 +36,10 @@ public class RentalMobil {
             double diskonTotal = DISKON + hitungDiskonTambahan(durasi - 7);
             totalHarga = totalHarga - (totalHarga * diskonTotal);
         }
-
         return totalHarga;
     }
 
-    public void tampilkanStruk(ArrayList<Integer> mobilId, ArrayList<Integer> durasi, int payMethod) {
+    public void tampilkanStruk(ArrayList<Integer> mobilId, ArrayList<Integer> durasi, ArrayList<Integer> durasiTerlambat, int payMethod) {
         String paymentMethod;
         double totalBiaya = 0;
 
@@ -47,13 +47,22 @@ public class RentalMobil {
 
         for (int i = 0; i < mobilId.size(); i++)
         {
+            int biayaTerlambat;
             double biayaMobil = hitungBiaya(mobilId.get(i), durasi.get(i));
             Mobil mobil = daftarMobil[mobilId.get(i) - 1];
 
+            if (durasiTerlambat.get(i) < 0) {
+                biayaTerlambat = 0;
+            } else {
+                biayaTerlambat = durasiTerlambat.get(i) * BIAYA_TERLAMBAT_PER_HARI;
+            }
+
             System.out.println("Selected Car: " + mobil.getNamaMobil());
             System.out.println("Rental Duration: " + durasi.get(i) + " days");
-            System.out.println("Car Cost: Rp " + biayaMobil + "\n");
-            totalBiaya += biayaMobil;
+            System.out.println("Late return by " + durasiTerlambat.get(i) + " day(s)");
+            System.out.println("Fine: " + biayaTerlambat);
+            System.out.println("Total Car Rental Cost (including fine): Rp " + (biayaMobil + biayaTerlambat) + "\n");
+            totalBiaya += (biayaMobil + biayaTerlambat);
         }
 
         switch (payMethod) {

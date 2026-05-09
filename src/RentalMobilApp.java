@@ -10,6 +10,7 @@ public class RentalMobilApp {
         char choice;
         ArrayList<Integer> mobilIdRentals = new ArrayList<>();
         ArrayList<Integer> durasiRentals = new ArrayList<>();
+        ArrayList<Integer> durasiTerlambat = new ArrayList<>();
 
         System.out.println("=== WELCOME TO CAR RENTAL ===");
 
@@ -46,6 +47,10 @@ public class RentalMobilApp {
             System.out.print("How many days would you like to rent this car? ");
             durasiRentals.add(scanner.nextInt());
 
+            // Input duration of late return in days
+            System.out.print("How many days were you late? ");
+            durasiTerlambat.add(scanner.nextInt());
+
             // Rent more?
             System.out.print("\nWould you like to rent another car? (y/n): ");
             choice = scanner.next().charAt(0);
@@ -62,7 +67,7 @@ public class RentalMobilApp {
         paymentMethod = scanner.nextInt();
 
         // Display receipt
-        rental.tampilkanStruk(mobilIdRentals, durasiRentals, paymentMethod);
+        rental.tampilkanStruk(mobilIdRentals, durasiRentals, durasiTerlambat, paymentMethod);
 
         scanner.close();
     }
