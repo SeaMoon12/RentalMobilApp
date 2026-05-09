@@ -22,8 +22,14 @@ public class RentalMobilApp {
             int mobilId;
             boolean isValid = false;
             do {
-                System.out.print("\nChoose a car (enter car ID): ");
+                System.out.print("\nChoose a car (enter car ID) enter -1 to view rental history: ");
                 mobilId = scanner.nextInt();
+
+                if (mobilId == -1) {
+                    System.out.println("Rental History:");
+                    rental.tampilkanRentalHistory(mobilIdRentals, durasiRentals);
+                    continue;
+                }
 
                 if (mobilId < 1 || mobilId > rental.getDaftarMobilLength()) {
                     System.out.print("Error: Invalid carID! Please select an ID between 1 and " + rental.getDaftarMobilLength() + ": ");

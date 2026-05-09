@@ -118,4 +118,18 @@ public class RentalMobil {
         }
         return false;
     }
+
+    public void tampilkanRentalHistory(ArrayList<Integer> mobilIdRentals, ArrayList<Integer> durasiRentals) {
+        if (mobilIdRentals.isEmpty()) {
+            System.out.println("No rentals yet.");
+            return;
+        }
+        for (int i = 0; i < mobilIdRentals.size(); i++) {
+            int mobilId = mobilIdRentals.get(i);
+            int durasi = durasiRentals.get(i);
+            double biaya = hitungBiaya(mobilId, durasi);
+            Mobil mobil = daftarMobil[mobilId - 1];
+            System.out.println("Car: " + mobil.getNamaMobil() + ", Duration: " + durasi + " days, Base Price: Rp " + biaya);
+        }
+    }
 }
