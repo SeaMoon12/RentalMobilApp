@@ -8,7 +8,8 @@ public class RentalMobil {
                 new Mobil(1, "Toyota Avanza", 500000),
                 new Mobil(2, "Honda Civic", 700000),
                 new Mobil(3, "BMW X5", 1000000),
-                new Mobil(4, "Suzuki Swift", 350000)
+                new Mobil(4, "Suzuki Swift", 350000),
+                new Mobil(5, "Honda CRV", 600000)
         };
     }
 
