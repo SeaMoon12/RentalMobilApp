@@ -12,8 +12,14 @@ public class RentalMobilApp {
         rental.tampilkanMobil();
 
         // Select car
+        int mobilId;
         System.out.print("\nChoose a car (enter car ID): ");
-        int mobilId = scanner.nextInt();
+        do {
+            mobilId = scanner.nextInt();
+            if (mobilId < 1 || mobilId > rental.getDafterMobilLength()) {
+                System.out.print("Error: Invalid carID! Please select an ID between 1 and " + rental.getDafterMobilLength() + ": ");
+            }
+        } while (mobilId < 1 || mobilId > rental.getDafterMobilLength());
 
         // Input rental duration
         System.out.print("How many days would you like to rent this car? ");

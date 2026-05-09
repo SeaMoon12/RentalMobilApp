@@ -40,4 +40,8 @@ public class RentalMobil {
         System.out.println("Rental Duration: " + durasi + " days");
         System.out.println("Total Cost: Rp " + totalBiaya);
     }
+
+    public int getDafterMobilLength() {
+        return daftarMobil.length;
+    }
 }
