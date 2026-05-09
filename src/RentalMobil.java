@@ -35,7 +35,7 @@ public class RentalMobil {
         Mobil mobil = daftarMobil[mobilId - 1];
 
         System.out.println("\n=== PAYMENT RECEIPT ===");
-        System.out.print("Selected Car: " + mobil.getNamaMobil());
+        System.out.println("Selected Car: " + mobil.getNamaMobil());
         System.out.println("Rental Duration: " + durasi + " days");
         System.out.println("Total Cost: Rp " + totalBiaya);
     }

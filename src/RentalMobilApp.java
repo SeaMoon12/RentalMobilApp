@@ -6,13 +6,13 @@ public class RentalMobilApp {
         Scanner scanner = new Scanner(System.in);
         RentalMobil rental = new RentalMobil();
 
-        System.out.println("WELCOME TO CAR RENTAL ===");
+        System.out.println("=== WELCOME TO CAR RENTAL ===");
 
         // Display available cars
         rental.tampilkanMobil();
 
         // Select car
-        System.out.print("Choose a car (enter car ID): ");
+        System.out.print("\nChoose a car (enter car ID): ");
         int mobilId = scanner.nextInt();
 
         // Input rental duration
