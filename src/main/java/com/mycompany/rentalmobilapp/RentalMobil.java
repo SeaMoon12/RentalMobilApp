@@ -1,3 +1,5 @@
+package com.mycompany.rentalmobilapp;
+
 import java.util.ArrayList;
 
 public class RentalMobil {

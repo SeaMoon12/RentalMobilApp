@@ -1,3 +1,5 @@
+package com.mycompany.rentalmobilapp;
+
 public class Mobil {
     int id;
     String namaMobil;
